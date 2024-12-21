@@ -1,0 +1,37 @@
+{
+  "version": "2.6",
+  "groups": [
+    {
+      "name": "",
+      "urls": [],
+      "substitutions": [
+        {
+          "input": "\\Whardmilk",
+          "inputType": "regexp",
+          "outputType": "text",
+          "output": "softmilk",
+          "caseSensitive": true
+        }
+      ],
+      "html": "inputoutput",
+      "enabled": true,
+      "mode": "auto&manual"
+    },
+    {
+      "name": "test",
+      "urls": [],
+      "substitutions": [
+        {
+          "input": "cheese",
+          "inputType": "regexp",
+          "outputType": "text",
+          "output": "hardmilk",
+          "caseSensitive": true
+        }
+      ],
+      "html": "none",
+      "enabled": true,
+      "mode": "auto&manual"
+    }
+  ]
+}
