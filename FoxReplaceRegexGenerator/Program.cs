@@ -8,6 +8,11 @@ internal static class Program
     private static readonly string OutputFilename = "GeneratedRules.json";
     private static readonly char[] Vowels = ['a', 'e', 'i', 'o', 'u'];
 
+    /// <summary>
+    /// Regex \b (word boundary) doesn't work when the word begins or ends with an accented character, this works better
+    /// </summary>
+    private static readonly string RegexWordBoundaryClause = @"(?=^|\s|\b)";
+
     private static void Main(string[] args)
     {
         Console.WriteLine("Generating replacement rules...");
@@ -188,6 +193,7 @@ internal static class Program
 
             yield return rule with 
             {
+                ReverseInputs = [rule.ReverseInputs[0]],
                 Bidirectional = false
             };
 
@@ -201,7 +207,7 @@ internal static class Program
                 yield return rule with
                 {
                     Inputs = rule.ReverseInputs,
-                    ReverseInputs = rule.Inputs,
+                    ReverseInputs = [rule.Inputs[0]],
 
                     Bidirectional = false
                 };
@@ -309,7 +315,7 @@ internal static class Program
     {
         if(Rule.WholeWords)
         {
-            return $@"\b{InputString}\b";
+            return $@"{RegexWordBoundaryClause}{InputString}{RegexWordBoundaryClause}";
         }
         else
         {

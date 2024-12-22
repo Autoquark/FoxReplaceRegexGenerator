@@ -1,5 +1,7 @@
 static class RuleList
 {
+    public static List<ReplacementRule> TestRules { get; } = [new(["concrete"], ["papier mache", "papier-mâché", "papier mâché"]) { Bidirectional = true }];
+
     public static List<ReplacementRule> Rules { get; } = 
     [
         // Misc nouns
@@ -44,6 +46,8 @@ static class RuleList
         new("curious", "fearful") { Bidirectional = true},
         new("figuratively", "literally") { Bidirectional = true},
         new("principles", "quirks") { Bidirectional = true},
+        new ReplacementRule("robust", "shoddy") { Bidirectional = true}.NoPluralHandling(),
+        new ReplacementRule(["verifiable", "verified"], "legit") { Bidirectional = true}.NoPluralHandling(),
 
         // Question words
         new ReplacementRule("why", "how").NoPluralHandling(),
@@ -57,8 +61,7 @@ static class RuleList
         new("measure", "reckon"),
 
         // Materials
-        new("concrete", "papier mache"),
-        new("concrete", "papier-mâché") { Bidirectional = true },
+        new(["concrete"], ["papier mache", "papier-mâché"]) { Bidirectional = true },
 
         new("philosophy", "pondering"),
         new("philosopher", "ponderer"),
@@ -69,10 +72,8 @@ static class RuleList
 
         // Units/measures
         new("mile", "furlong") { Bidirectional = true },
-        new("kilometre", "league") { Bidirectional = true },
-        new("kilometer", "league") { Bidirectional = true },
-        new("litre", "dram") { Bidirectional = true },
-        new("liter", "dram") { Bidirectional = true },
+        new(["kilometre", "kilometer"], "league") { Bidirectional = true },
+        new(["litre", "liter"], "dram") { Bidirectional = true },
 
         // Names
         new("charles", "charler"),
@@ -81,8 +82,7 @@ static class RuleList
         new("larry", "larriott"),
 
         // Heresy
-        new("the pope", "Satan") { CapitalisationHandling = CapitalisationHandling.Ignore },
-        new("pope Francis", "Satan") { CapitalisationHandling = CapitalisationHandling.Ignore },
+        new(["the pope", "pope Francis", "pope"], "Satan") { CapitalisationHandling = CapitalisationHandling.Ignore },
         new("pope", "Satan") { CapitalisationHandling = CapitalisationHandling.Ignore },
         new("bible", "1987 Sports Illustrated Swimsuit Issue") { CapitalisationHandling = CapitalisationHandling.Ignore },
         new("biblical", "literary"),
